@@ -43,21 +43,6 @@ def get_students():
     }
 
 
-# SEARCH STUDENT BY NAME
-@app.get("/students/search")
-def search_student(name: str):
-
-    results = []
-
-    for student in students:
-        if name.lower() in student["name"].lower():
-            results.append(student)
-
-    return {
-        "students": results
-    }
-
-
 # FILTER STUDENTS BY COURSE
 @app.get("/students/course/{course_name}")
 def get_students_by_course(course_name: str):
@@ -73,13 +58,6 @@ def get_students_by_course(course_name: str):
         "students": results
     }
 
-# STUDENT COUNT
-@app.get("/students/count")
-def get_student_count():
-
-    return {
-        "total_students": len(students)
-    }
 
 
 # GET STUDENT BY ID
@@ -120,31 +98,6 @@ def create_student(student: Student):
         "student": new_student
     }
 
-
-# UPDATE STUDENT
-@app.put("/students/{student_id}")
-def update_student(
-    student_id: int,
-    student: Student
-):
-
-    for existing_student in students:
-
-        if existing_student["id"] == student_id:
-
-            existing_student["name"] = student.name
-            existing_student["age"] = student.age
-            existing_student["course"] = student.course
-
-            return {
-                "message": "Student updated successfully",
-                "student": existing_student
-            }
-
-    raise HTTPException(
-        status_code=404,
-        detail="Student not found"
-    )
 
 # DELETE STUDENT
 @app.delete("/students/{student_id}")
