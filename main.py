@@ -43,21 +43,6 @@ def get_students():
     }
 
 
-# SEARCH STUDENT BY NAME
-@app.get("/students/search")
-def search_student(name: str):
-
-    results = []
-
-    for student in students:
-        if name.lower() in student["name"].lower():
-            results.append(student)
-
-    return {
-        "students": results
-    }
-
-
 # FILTER STUDENTS BY COURSE
 @app.get("/students/course/{course_name}")
 def get_students_by_course(course_name: str):
@@ -73,13 +58,6 @@ def get_students_by_course(course_name: str):
         "students": results
     }
 
-# STUDENT COUNT
-@app.get("/students/count")
-def get_student_count():
-
-    return {
-        "total_students": len(students)
-    }
 
 
 # GET STUDENT BY ID
